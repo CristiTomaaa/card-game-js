@@ -49,11 +49,36 @@ const cardGenerator = () => {
     back.classList = "back";
     // attach info to cards
     face.src = item.imgSrc;
+    card.setAttribute("name", item.name);
     // attach cards to the section
     section.appendChild(card);
     card.appendChild(face);
     card.appendChild(back);
+
+    card.addEventListener("click", (e) => {
+      card.classList.toggle("toggleCard");
+      checkCards(e);
+    });
   });
+};
+
+// check cards
+const checkCards = (e) => {
+  console.log(e);
+  const clickedCard = e.target;
+  clickedCard.classList.add("flipped");
+  const flippedCards = document.querySelectorAll(".flipped");
+  // logic
+  if (flippedCards.length === 2) {
+    if (
+      flippedCards[0].getAttribute("name") ===
+      flippedCards[1].getAttribute("name")
+    ) {
+      console.log("Match");
+    } else {
+      console.log("wrong");
+    }
+  }
 };
 
 cardGenerator();
